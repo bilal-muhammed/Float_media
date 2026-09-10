@@ -128,21 +128,21 @@ export default function LandingPage() {
       </section>
 
       {/* ─── WHAT WE DO ─── */}
-      <section className="relative z-10 bg-[#0a0a0a] pt-12 pb-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+      <section className="relative z-10 bg-[#0a0a0a] pt-8 pb-14 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <Reveal>
-          <p className="section-label mb-4">What we do</p>
+          <p className="section-label mb-3">What we do</p>
         </Reveal>
         <HeadingReveal className="section-title max-w-[700px]" delay={60}>
           Today a campaign moves by pen drive. With Flotad it moves in one click.
         </HeadingReveal>
         <Reveal delay={120}>
-          <p className="section-subtitle mt-5">
+          <p className="section-subtitle mt-3">
             Design it, aim it, publish it — from one place. AI does the repetitive part: resizing every format and building depth content for holographic screens.
           </p>
         </Reveal>
 
         {/* 3 Steps */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             { num: '01', label: 'Create', title: 'One brief, every format', desc: 'Your creative is resized for every screen in the network — window, aisle, counter, holographic. No agency round trip for a weekend offer.',
               icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg> },
@@ -152,56 +152,56 @@ export default function LandingPage() {
               icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" /></svg> },
           ].map((step, i) => (
             <Reveal key={i} delay={i * 100} variant="scale">
-              <div className="group relative border border-[#27272a] bg-[#18181b] px-6 py-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+              <div className="group relative border border-[#27272a] bg-[#18181b] px-5 py-4 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0891b2]/0 to-transparent transition-all duration-500 group-hover:via-[#0891b2]/40" />
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2.5">
                     <div className="flex h-8 w-8 items-center justify-center bg-[#0891b2]/10 text-[#0891b2] transition-colors group-hover:bg-[#0891b2]/20">
                       {step.icon}
                     </div>
                     <div>
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-[#0891b2]/50">{step.num}</span>
-                      <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0891b2] leading-tight">{step.label}</h3>
+                      <span className="text-[10px] font-bold tracking-wider uppercase text-[#0891b2]/50">{step.num}</span>
+                      <h3 className="text-[13px] font-semibold uppercase tracking-wider text-[#0891b2] leading-tight">{step.label}</h3>
                     </div>
                   </div>
                 </div>
-                <h4 className="text-[17px] font-semibold text-[#fafafa] leading-snug">{step.title}</h4>
-                <p className="mt-2 text-[13px] leading-relaxed text-[#a1a1aa]">{step.desc}</p>
+                <h4 className="text-[16px] font-semibold text-[#fafafa] leading-snug">{step.title}</h4>
+                <p className="mt-1.5 text-[12px] leading-relaxed text-[#a1a1aa]">{step.desc}</p>
               </div>
             </Reveal>
           ))}
         </div>
 
         {/* Two feature cards */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
           <Reveal variant="left">
-            <div className="group border border-[#27272a] bg-[#18181b] p-5 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
-              <div className="aspect-[16/10] border border-dashed border-[#27272a] bg-[#0a0a0a] mb-6 flex items-center justify-center transition-colors group-hover:border-[#0891b2]/20">
-                <div className="text-center">
-                  <Monitor className="h-10 w-10 text-[#0891b2]/25 mx-auto mb-2" />
-                  <p className="text-[12px] text-[#71717a]">Product shot — transparent film / holographic display</p>
-                </div>
+            <div className="group relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+              <div className="aspect-[3/2] overflow-hidden">
+                <img src="/medias/floatAd_product1.jpg" alt="Transparent film and holographic display" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <p className="text-[11px] font-semibold tracking-wider uppercase text-[#71717a]">Flot Media · The Displays</p>
-              <h3 className="text-[18px] font-semibold text-[#fafafa] mt-2">Any surface becomes ad space</h3>
-              <p className="text-[14px] leading-relaxed text-[#a1a1aa] mt-2">
-                Transparent film on your glass facade. Hanging panels. Dual-sided screens. No new structure, no permit, no extra infrastructure.
-              </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <p className="text-[11px] font-semibold tracking-wider uppercase text-[#71717a]">Flot Media · The Displays</p>
+                <h3 className="text-[18px] font-semibold text-[#fafafa] mt-2">Any surface becomes ad space</h3>
+                <p className="text-[14px] leading-relaxed text-[#a1a1aa] mt-2">
+                  Transparent film on your glass facade. Hanging panels. Dual-sided screens. No new structure, no permit, no extra infrastructure.
+                </p>
+              </div>
             </div>
           </Reveal>
           <Reveal variant="right">
-            <div className="group border border-[#27272a] bg-[#18181b] p-5 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
-              <div className="aspect-[16/10] border border-dashed border-[#27272a] bg-[#0a0a0a] mb-6 flex items-center justify-center transition-colors group-hover:border-[#0891b2]/20">
-                <div className="text-center">
-                  <Smartphone className="h-10 w-10 text-[#0891b2]/25 mx-auto mb-2" />
-                  <p className="text-[12px] text-[#71717a]">Flotad dashboard screenshot</p>
-                </div>
+            <div className="group relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+              <div className="aspect-[3/2] overflow-hidden">
+                <img src="/medias/floatAd_product2.jpg" alt="Flotad dashboard" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <p className="text-[11px] font-semibold tracking-wider uppercase text-[#71717a]">Flotad · The Platform</p>
-              <h3 className="text-[18px] font-semibold text-[#fafafa] mt-2">One login runs the network</h3>
-              <p className="text-[14px] leading-relaxed text-[#a1a1aa] mt-2">
-                Holographic displays and the screens already in your stores — one dashboard, from a laptop or a phone.
-              </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+                <p className="text-[11px] font-semibold tracking-wider uppercase text-[#71717a]">Flotad · The Platform</p>
+                <h3 className="text-[18px] font-semibold text-[#fafafa] mt-2">One login runs the network</h3>
+                <p className="text-[14px] leading-relaxed text-[#a1a1aa] mt-2">
+                  Holographic displays and the screens already in your stores — one dashboard, from a laptop or a phone.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
