@@ -81,8 +81,8 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       {/* ─── HERO ─── */}
-      <section className="relative h-screen">
-        <div className="sticky top-0 h-screen overflow-hidden">
+      <section className="relative h-[100dvh]">
+        <div className="sticky top-0 h-[100dvh] overflow-hidden">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover">
             <source src="/medias/float_ad_vedio_banner.mp4" type="video/mp4" />
           </video>
@@ -211,8 +211,8 @@ export default function LandingPage() {
       <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0891b2]/[0.04] via-transparent to-[#0891b2]/[0.02]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#0891b2]/[0.04] rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#0891b2]/[0.03] rounded-full blur-[100px]" />
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-[#0891b2]/[0.04] rounded-full blur-[60px] md:blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-[#0891b2]/[0.03] rounded-full blur-[50px] md:blur-[100px]" />
         </div>
 
         <div className="max-w-[1200px] mx-auto">
@@ -228,12 +228,14 @@ export default function LandingPage() {
             </p>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_minmax(300px,380px)] gap-8 items-start">
             <Reveal variant="scale">
               <div className="relative border border-[#27272a] bg-[#18181b] overflow-hidden aspect-[16/10]">
-                <video autoPlay loop muted playsInline className="w-full h-full object-cover scale-110 origin-top">
-                  <source src="/medias/float_add_3rd_media.mp4" type="video/mp4" />
-                </video>
+                <div className="absolute inset-0 scale-110 origin-top">
+                  <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                    <source src="/medias/float_add_3rd_media.mp4" type="video/mp4" />
+                  </video>
+                </div>
                 <div className="absolute top-4 left-4 z-10 inline-flex items-center border border-[#27272a] bg-[#18181b]/80 backdrop-blur px-3 py-1 text-[11px] font-medium text-[#a1a1aa]">
                   Implementation video · 60–90 sec
                 </div>

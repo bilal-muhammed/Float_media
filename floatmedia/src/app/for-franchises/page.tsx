@@ -142,7 +142,7 @@ export default function DashboardPage() {
       {/* ═══════ HERO ═══════ */}
       <section className="relative flex items-center overflow-hidden py-16 md:py-36">
         <div className="absolute inset-0">
-          <div className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 bg-[#0891b2]/[0.03] blur-[120px]" />
+          <div className="absolute left-1/2 top-0 h-[300px] w-[300px] md:h-[600px] md:w-[600px] -translate-x-1/2 bg-[#0891b2]/[0.03] blur-[60px] md:blur-[120px]" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6">
@@ -317,7 +317,7 @@ export default function DashboardPage() {
       {/* ═══════ HOLOGRAPHIC UPGRADE ═══════ */}
       <section className="section-full-bleed border-t border-[#27272a] py-14 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-16">
+          <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-16 overflow-hidden">
             <div>
               <FadeIn direction="left">
                 <p className="section-label">The Upgrade Nobody Else Offers</p>
@@ -366,7 +366,7 @@ export default function DashboardPage() {
                   <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                     <source src="/medias/for_franchies_banner.mp4" type="video/mp4" />
                   </video>
-                  <div className="absolute top-6 left-6 z-10 border border-[#27272a] bg-[#0a0a0a]/90 px-4 py-2 text-[11px] font-medium text-[#a1a1aa] backdrop-blur-sm">
+                  <div className="absolute top-3 left-3 md:top-6 md:left-6 z-10 border border-[#27272a] bg-[#0a0a0a]/90 px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-[11px] font-medium text-[#a1a1aa] backdrop-blur-sm">
                     Install walkthrough
                   </div>
                 </div>

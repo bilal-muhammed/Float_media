@@ -291,6 +291,7 @@ body {
 /* ─── Full-Bleed Section Backgrounds ─── */
 .section-full-bleed {
   position: relative;
+  overflow: hidden;
 }
 .section-full-bleed::before {
   content: '';

@@ -88,7 +88,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile */}
-          <button className={cn('md:hidden flex items-center justify-center w-11 h-11 -mr-2', scrolled || !isHome ? 'text-[#a1a1aa]' : 'text-white')} onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className={cn('md:hidden flex items-center justify-center w-11 h-11', scrolled || !isHome ? 'text-[#a1a1aa]' : 'text-white')} onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
@@ -96,9 +96,9 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div className="fixed inset-0 z-40 md:hidden overflow-hidden">
           <div className="absolute inset-0 bg-black/30" onClick={() => setMobileOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-72 bg-[#0a0a0a] border-l border-[#27272a] px-6 py-20">
+          <div className="absolute right-0 top-0 h-full w-72 max-w-[85vw] bg-[#0a0a0a] border-l border-[#27272a] px-6 py-20">
             <nav className="space-y-1">
               <Link href="/" onClick={() => setMobileOpen(false)} className={cn('block py-3 text-sm font-medium', pathname === '/' ? 'text-[#fafafa]' : 'text-[#a1a1aa]')}>Company</Link>
               <Link href="/for-franchises" onClick={() => setMobileOpen(false)} className={cn('block py-3 text-sm font-medium', pathname === '/for-franchises' ? 'text-[#fafafa]' : 'text-[#a1a1aa]')}>For franchises</Link>
