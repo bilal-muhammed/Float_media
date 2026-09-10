@@ -156,8 +156,16 @@ export default function DashboardPage() {
           <div className="relative border border-[#27272a] bg-[#18181b] p-1 backdrop-blur-md">
             <div className="border border-[#27272a] bg-[#18181b] p-7 md:p-12">
               <FadeIn delay={100}>
-                <h1 className="text-[2rem] font-bold leading-[1.1] text-[#fafafa] md:text-[3.5rem]">
-                  Your marketing team should not be couriering pen drives.
+                <h1 className="group text-[2rem] font-bold leading-[1.1] text-[#fafafa] md:text-[3.5rem] cursor-default">
+                  {'Your marketing team should not be couriering pen drives.'.split('').map((char, i) => (
+                    <span
+                      key={i}
+                      className="inline-block transition-colors duration-300 group-hover:text-[#22d3ee]"
+                      style={{ transitionDelay: `${i * 15}ms` }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  ))}
                 </h1>
               </FadeIn>
 
