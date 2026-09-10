@@ -79,9 +79,9 @@ function CountUp({ end, suffix = '' }: { end: number; suffix?: string }) {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
       {/* ─── HERO ─── */}
-      <section className="relative h-[100dvh]">
+      <section className="relative h-[100dvh] overflow-hidden">
         <div className="sticky top-0 h-[100dvh] overflow-hidden">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover">
             <source src="/medias/float_ad_vedio_banner.mp4" type="video/mp4" />
@@ -128,7 +128,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── WHAT WE DO ─── */}
-      <section className="relative z-10 bg-[#0a0a0a] pt-12 pb-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
+      <section className="relative z-10 bg-[#0a0a0a] pt-12 pb-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <Reveal>
           <p className="section-label mb-4">What we do</p>
         </Reveal>
@@ -292,7 +292,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── INSIDE FLOTAD ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <div className="border-t border-[#27272a] pt-14 md:pt-24" />
 
         <Reveal>
@@ -430,7 +430,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── TALK TO US ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <div className="border-t border-[#27272a] pt-14 md:pt-24" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">

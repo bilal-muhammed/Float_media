@@ -16,7 +16,7 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
-import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import Card, { CardContent } from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { useScrollAnimation } from '@/lib/hooks';
 import { cn } from '@/lib/utils';

@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Users, Plus, Edit, Trash2, X, Mic, Sliders, Sparkles } from 'lucide-react';
+import { Users, Plus, Edit, Trash2, X, Mic, Sparkles } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import BrandVoiceSelector from '@/components/brand-voice/BrandVoiceSelector';
 import PlatformSelector from '@/components/persona/PlatformSelector';
-import { Persona, BrandVoice, DetailLevel, PlatformType, BRAND_VOICES, DETAIL_LEVELS } from '@/types';
+import { Persona, BrandVoice, DetailLevel, PlatformType } from '@/types';
 import { useScrollAnimation } from '@/lib/hooks';
 import { cn } from '@/lib/utils';
 

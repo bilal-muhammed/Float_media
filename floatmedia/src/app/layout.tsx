@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Flot Media - Beyond Billboards',
   description: 'Digital signage redefined. One dashboard. Every screen. From a single display to a global network.',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,6 +1,6 @@
 import { PlatformType, BrandVoice, DetailLevel, Post } from '@/types';
 import { generateContent } from './ai';
-import { canGenerate, getGenerationsRemaining } from './subscription';
+import { canGenerate } from './subscription';
 
 interface GeneratePostParams {
   topic: string;
@@ -28,7 +28,7 @@ interface GeneratePostResult {
 export async function generatePost(params: GeneratePostParams): Promise<GeneratePostResult> {
   const { subscription } = params;
 
-  if (!canGenerate(subscription as any)) {
+  if (!canGenerate(subscription)) {
     return {
       success: false,
       error: 'You have reached your monthly generation limit. Upgrade to Pro for unlimited generations.',

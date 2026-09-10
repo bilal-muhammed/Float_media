@@ -138,7 +138,7 @@ export default function DashboardPage() {
   useScrollRevealElements();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
       {/* ═══════ HERO ═══════ */}
       <section className="relative flex items-center overflow-hidden py-16 md:py-36">
         <div className="absolute inset-0">
@@ -462,7 +462,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ LOGO WALL ═══════ */}
-      <section className="border-t border-[#27272a] py-12 sm:py-18">
+      <section className="border-t border-[#27272a] py-12 sm:py-18 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6">
           <p className="sr-fade-up text-[11px] font-semibold tracking-[0.14em] uppercase text-[#71717a]">
             Chain Logo Wall — Drop Partner or Pilot Logos Here

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { BarChart3, TrendingUp, Users, Eye, ThumbsUp, MessageCircle, Share2, ArrowUp, ArrowDown, Calendar } from 'lucide-react';
 import Button from '@/components/ui/Button';
-import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import Card, { CardHeader, CardContent } from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { useScrollAnimation } from '@/lib/hooks';
 import { cn } from '@/lib/utils';

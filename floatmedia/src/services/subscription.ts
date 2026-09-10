@@ -1,8 +1,8 @@
-import { Plan, Subscription } from '@/types';
+import { Subscription } from '@/types';
 
 const FREE_LIMIT = 3;
-const PRO_MONTHLY = 4.99;
-const ENTERPRISE_MONTHLY = 19.99;
+
+type SubscriptionInput = { plan: string; generationsUsed: number; generationsLimit: number } | null;
 
 export const PLANS = {
   FREE: {
@@ -19,7 +19,7 @@ export const PLANS = {
   },
   PRO: {
     name: 'Pro',
-    price: PRO_MONTHLY,
+    price: 4.99,
     period: 'month',
     features: [
       'Unlimited generations',
@@ -33,7 +33,7 @@ export const PLANS = {
   },
   ENTERPRISE: {
     name: 'Enterprise',
-    price: ENTERPRISE_MONTHLY,
+    price: 19.99,
     period: 'month',
     features: [
       'Everything in Pro',
@@ -48,30 +48,8 @@ export const PLANS = {
   },
 } as const;
 
-export function canGenerate(subscription: Subscription | null): boolean {
-  if (!subscription) return true; // Allow first-time users
+export function canGenerate(subscription: SubscriptionInput): boolean {
+  if (!subscription) return true;
   if (subscription.plan === 'PRO' || subscription.plan === 'ENTERPRISE') return true;
   return subscription.generationsUsed < subscription.generationsLimit;
-}
-
-export function getGenerationsRemaining(subscription: Subscription | null): number {
-  if (!subscription) return FREE_LIMIT;
-  if (subscription.plan === 'PRO' || subscription.plan === 'ENTERPRISE') return Infinity;
-  return Math.max(0, subscription.generationsLimit - subscription.generationsUsed);
-}
-
-export function getPlanPrice(plan: Plan): number {
-  return PLANS[plan].price;
-}
-
-export function getPlanFeatures(plan: Plan): string[] {
-  return [...PLANS[plan].features];
-}
-
-export function getNextPlan(currentPlan: Plan): Plan | null {
-  switch (currentPlan) {
-    case 'FREE': return 'PRO';
-    case 'PRO': return 'ENTERPRISE';
-    case 'ENTERPRISE': return null;
-  }
 }

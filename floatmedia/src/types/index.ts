@@ -7,15 +7,6 @@ export type PlatformType = 'X' | 'LINKEDIN' | 'INSTAGRAM' | 'FACEBOOK' | 'TIKTOK
 
 export type PostStatus = 'DRAFT' | 'SCHEDULED' | 'PUBLISHED' | 'FAILED';
 
-export interface User {
-  id: string;
-  email: string;
-  name?: string;
-  avatarUrl?: string;
-  subscription?: Subscription;
-  createdAt: Date;
-}
-
 export interface Subscription {
   id: string;
   userId: string;
@@ -61,34 +52,6 @@ export interface Post {
   status: PostStatus;
   engagement?: Record<string, unknown>;
   createdAt: Date;
-}
-
-export interface ApiKey {
-  id: string;
-  userId: string;
-  platform: PlatformType;
-  apiKey: string;
-  apiSecret?: string;
-  isActive: boolean;
-}
-
-export interface SocialAccount {
-  id: string;
-  userId: string;
-  platform: PlatformType;
-  accountId: string;
-  accessToken: string;
-  refreshToken?: string;
-  expiresAt?: Date;
-  isActive: boolean;
-}
-
-export interface ContentGeneration {
-  content: string;
-  hashtags: string[];
-  platform: PlatformType;
-  characterCount: number;
-  withinLimit: boolean;
 }
 
 export interface PlatformLimits {
