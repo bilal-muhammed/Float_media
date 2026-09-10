@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  avatarUrl     String?
+  subscription  Subscription?
+  personas      Persona[]
+  posts         Post[]
+  apiKeys       ApiKey[]
+  socialAccounts SocialAccount[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Subscription {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  plan          Plan      @default(FREE)
+  generationsUsed Int     @default(0)
+  generationsLimit Int    @default(3)
+  currentPeriodStart DateTime @default(now())
+  currentPeriodEnd   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum Plan {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+model Persona {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  name          String
+  role          String?
+  avatarUrl     String?
+  description   String?
+  brandVoice    String    @default("professional")
+  detailLevel   String    @default("detailed")
+  platforms     Platform[]
+  posts         Post[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Platform {
+  id            String    @id @default(cuid())
+  personaId     String
+  persona       Persona   @relation(fields: [personaId], references: [id])
+  type          PlatformType
+  handle        String?
+  accountId     String?
+  accessToken   String?
+  refreshToken  String?
+  isActive      Boolean   @default(true)
+  posts         Post[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum PlatformType {
+  X
+  LINKEDIN
+  INSTAGRAM
+  FACEBOOK
+  TIKTOK
+}
+
+model Post {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  personaId     String?
+  persona       Persona?  @relation(fields: [personaId], references: [id])
+  platformId    String?
+  platform      Platform? @relation(fields: [platformId], references: [id])
+  content       String
+  hashtags      String[]
+  scheduledAt   DateTime?
+  publishedAt   DateTime?
+  status        PostStatus @default(DRAFT)
+  engagement    Json?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum PostStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  FAILED
+}
+
+model ApiKey {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  platform      PlatformType
+  apiKey        String
+  apiSecret     String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model SocialAccount {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  platform      PlatformType
+  accountId     String
+  accessToken   String
+  refreshToken  String?
+  expiresAt     DateTime?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
