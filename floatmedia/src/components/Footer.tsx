@@ -4,8 +4,8 @@ import { ArrowUpRight } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="border-t border-[#27272a] bg-[#0a0a0a]">
-      <div className="mx-auto max-w-[1200px] px-6 py-16 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+      <div className="mx-auto max-w-[1200px] px-6 py-10 md:py-16 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2.5">
               <img src="/images/logo.png" alt="Flot Media" className="h-11 w-11 object-contain -ml-1" />
@@ -52,7 +52,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-14 border-t border-[#27272a] pt-8">
+        <div className="mt-8 md:mt-14 border-t border-[#27272a] pt-8">
           <p className="text-[11px] text-[#71717a]">Flot Media LLP · Registered office: Pathanamthitta, Kerala, India</p>
           <p className="mt-2 text-[11px] text-[#71717a]">&copy; 2026 Flot Media LLP. All rights reserved.</p>
         </div>

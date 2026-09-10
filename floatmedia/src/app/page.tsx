@@ -175,7 +175,7 @@ export default function LandingPage() {
         {/* Two feature cards */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
           <Reveal variant="left">
-            <div className="group border border-[#27272a] bg-[#18181b] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+            <div className="group border border-[#27272a] bg-[#18181b] p-5 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
               <div className="aspect-[16/10] border border-dashed border-[#27272a] bg-[#0a0a0a] mb-6 flex items-center justify-center transition-colors group-hover:border-[#0891b2]/20">
                 <div className="text-center">
                   <Monitor className="h-10 w-10 text-[#0891b2]/25 mx-auto mb-2" />
@@ -190,7 +190,7 @@ export default function LandingPage() {
             </div>
           </Reveal>
           <Reveal variant="right">
-            <div className="group border border-[#27272a] bg-[#18181b] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+            <div className="group border border-[#27272a] bg-[#18181b] p-5 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
               <div className="aspect-[16/10] border border-dashed border-[#27272a] bg-[#0a0a0a] mb-6 flex items-center justify-center transition-colors group-hover:border-[#0891b2]/20">
                 <div className="text-center">
                   <Smartphone className="h-10 w-10 text-[#0891b2]/25 mx-auto mb-2" />
@@ -290,8 +290,8 @@ export default function LandingPage() {
       </section>
 
       {/* ─── INSIDE FLOTAD ─── */}
-      <section className="relative py-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
-        <div className="border-t border-[#27272a] pt-24" />
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
+        <div className="border-t border-[#27272a] pt-14 md:pt-24" />
 
         <Reveal>
           <p className="section-label mb-4">Inside Flotad</p>
@@ -325,14 +325,14 @@ export default function LandingPage() {
                       <div className="w-2.5 h-2.5 bg-[#ffbd2e]" />
                       <div className="w-2.5 h-2.5 bg-[#27c93f]" />
                     </div>
-                    <span className="text-[12px] text-[#71717a] ml-2">console.flotad.com / network</span>
+                    <span className="text-[12px] text-[#71717a] ml-2 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap">console.flotad.com / network</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-[#27c93f]" />
                     <span className="text-[12px] text-[#71717a]">All screens reporting</span>
                   </div>
                 </div>
-                <div className="p-8">
+                <div className="p-5 sm:p-8">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     {[
                       { label: 'Screens online', value: 1284, display: '/1,302', highlight: false },
@@ -342,7 +342,7 @@ export default function LandingPage() {
                     ].map((stat, i) => (
                       <div key={i} className="border border-[#27272a] bg-[#0a0a0a] p-4">
                         <p className="text-[11px] font-semibold tracking-wider uppercase text-[#71717a]">{stat.label}</p>
-                        <p className={`text-[28px] font-bold mt-1 ${stat.highlight ? 'text-[#22d3ee]' : 'text-[#fafafa]'}`}>
+                        <p className={`text-[22px] sm:text-[28px] font-bold mt-1 ${stat.highlight ? 'text-[#22d3ee]' : 'text-[#fafafa]'}`}>
                           <CountUp end={stat.value} suffix={stat.suffix || ''} />{stat.display}
                         </p>
                       </div>
@@ -367,7 +367,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── THE BIGGER PICTURE ─── */}
-      <section className="relative py-24 px-6 lg:px-8 overflow-hidden" style={{ isolation: 'isolate' }}>
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 overflow-hidden" style={{ isolation: 'isolate' }}>
         <img src="/images/2nd_banner.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: -2 }} />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/30 to-[#0a0a0a]/60" style={{ zIndex: -1 }} />
 
@@ -392,7 +392,7 @@ export default function LandingPage() {
               { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <Calendar className="h-5 w-5" />, title: 'If you run events and expos', desc: 'Rent a fleet of holographic displays for the week, or bring your own, and drive every screen across the venue from one laptop for as long as the event runs.' },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 80} variant={i % 2 === 0 ? 'left' : 'right'}>
-                <div className="group bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+                <div className="group bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-5 sm:p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-[#22d3ee]">{item.icon}</span>
                     <span className={`inline-flex items-center px-2.5 py-0.5 text-[11px] font-semibold ${item.badgeColor}`}>{item.badge}</span>
@@ -428,10 +428,10 @@ export default function LandingPage() {
       </section>
 
       {/* ─── TALK TO US ─── */}
-      <section className="relative py-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
-        <div className="border-t border-[#27272a] pt-24" />
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto">
+        <div className="border-t border-[#27272a] pt-14 md:pt-24" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
           <div>
             <Reveal>
               <p className="section-label mb-4">Talk to us</p>
@@ -457,8 +457,8 @@ export default function LandingPage() {
           </div>
 
           <Reveal delay={100} variant="right">
-            <form className="border border-[#27272a] bg-[#18181b] p-8 space-y-5" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
+            <form className="border border-[#27272a] bg-[#18181b] p-5 sm:p-8 space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[12px] font-medium text-[#a1a1aa] mb-1.5">Your name</label>
                   <input type="text" placeholder="Full name" className="input-field" />
@@ -468,7 +468,7 @@ export default function LandingPage() {
                   <input type="email" placeholder="name@company.com" className="input-field" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[12px] font-medium text-[#a1a1aa] mb-1.5">Company or chain</label>
                   <input type="text" placeholder="Brand name" className="input-field" />
@@ -482,7 +482,7 @@ export default function LandingPage() {
                 <label className="block text-[12px] font-medium text-[#a1a1aa] mb-1.5">What do you want to achieve?</label>
                 <textarea rows={4} placeholder="e.g. one dashboard for all our stores, and a holographic window at the flagship" className="input-field resize-none" />
               </div>
-              <button type="submit" className="group w-full bg-[#0891b2] px-5 py-3 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_40px_-8px_rgba(8,145,178,0.5)] flex items-center justify-center gap-2">
+              <button type="submit" className="group w-full bg-[#0891b2] px-5 py-3.5 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_40px_-8px_rgba(8,145,178,0.5)] flex items-center justify-center gap-2">
                 Start the conversation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <p className="text-center text-[12px] text-[#71717a]">Mockup form — no data is submitted.</p>

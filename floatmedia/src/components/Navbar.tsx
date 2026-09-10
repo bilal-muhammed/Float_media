@@ -88,7 +88,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile */}
-          <button className={cn('md:hidden', scrolled || !isHome ? 'text-[#a1a1aa]' : 'text-white')} onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className={cn('md:hidden flex items-center justify-center w-11 h-11 -mr-2', scrolled || !isHome ? 'text-[#a1a1aa]' : 'text-white')} onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
@@ -105,7 +105,7 @@ export default function Navbar() {
               <a href="https://wa.me/919497672692?text=Hi%2C%20I%27m%20interested%20in%20Flot%20Media" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="block py-3 text-sm font-medium text-[#a1a1aa]">Contact</a>
             </nav>
             <div className="mt-8">
-              <a href="https://wa.me/919497672692?text=Hi%2C%20I%27d%20like%20to%20book%20a%20demo%20of%20Flot%20Media" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2 bg-[#0891b2] px-4 py-2.5 text-sm font-semibold text-white">
+              <a href="https://wa.me/919497672692?text=Hi%2C%20I%27d%20like%20to%20book%20a%20demo%20of%20Flot%20Media" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2 bg-[#0891b2] px-5 py-3 text-sm font-semibold text-white">
                 Book a Demo <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </div>

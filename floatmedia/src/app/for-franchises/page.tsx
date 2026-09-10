@@ -140,7 +140,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       {/* ═══════ HERO ═══════ */}
-      <section className="relative flex items-center overflow-hidden py-28 md:py-36">
+      <section className="relative flex items-center overflow-hidden py-16 md:py-36">
         <div className="absolute inset-0">
           <div className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 bg-[#0891b2]/[0.03] blur-[120px]" />
         </div>
@@ -191,7 +191,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ THE CHANGE ═══════ */}
-      <section className="section-full-bleed border-t border-[#27272a] py-24 md:py-32">
+      <section className="section-full-bleed border-t border-[#27272a] py-14 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn>
             <p className="section-label">The Change</p>
@@ -243,7 +243,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ FRANCHISE BENEFITS ═══════ */}
-      <section className="relative py-24 md:py-32 overflow-hidden" style={{ isolation: 'isolate' }}>
+      <section className="relative py-14 md:py-32 overflow-hidden" style={{ isolation: 'isolate' }}>
         <img src="/images/franchices_1st_banner.png" alt="" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: -2 }} />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/30 to-[#0a0a0a]/60" style={{ zIndex: -1 }} />
 
@@ -277,7 +277,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ FLASH CAMPAIGNS ═══════ */}
-      <section className="section-full-bleed border-t border-[#27272a] py-24 md:py-32">
+      <section className="section-full-bleed border-t border-[#27272a] py-14 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn>
             <p className="section-label">Flash Campaigns</p>
@@ -289,7 +289,7 @@ export default function DashboardPage() {
             </p>
           </FadeIn>
 
-          <div className="mt-18">
+          <div className="mt-14 sm:mt-18">
             <StaggerContainer className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4" delay={100}>
               {steps.map((item, i) => (
                 <div key={i} className="group relative">
@@ -315,9 +315,9 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ HOLOGRAPHIC UPGRADE ═══════ */}
-      <section className="section-full-bleed border-t border-[#27272a] py-24 md:py-36">
+      <section className="section-full-bleed border-t border-[#27272a] py-14 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-16 md:grid-cols-[1fr_1.2fr] md:items-start">
+          <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start md:gap-16">
             <div>
               <FadeIn direction="left">
                 <p className="section-label">The Upgrade Nobody Else Offers</p>
@@ -397,7 +397,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ ROLLOUT ═══════ */}
-      <section id="rollout" className="section-full-bleed border-t border-[#27272a] py-24 md:py-36">
+      <section id="rollout" className="section-full-bleed border-t border-[#27272a] py-14 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn>
             <p className="section-label">Rollout</p>
@@ -435,7 +435,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ WHERE IT FITS ═══════ */}
-      <section className="section-full-bleed border-t border-[#27272a] py-24 md:py-32">
+      <section className="section-full-bleed border-t border-[#27272a] py-14 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn>
             <p className="section-label">Where It Fits</p>
@@ -462,7 +462,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ LOGO WALL ═══════ */}
-      <section className="border-t border-[#27272a] py-18">
+      <section className="border-t border-[#27272a] py-12 sm:py-18">
         <div className="mx-auto max-w-7xl px-6">
           <p className="sr-fade-up text-[11px] font-semibold tracking-[0.14em] uppercase text-[#71717a]">
             Chain Logo Wall — Drop Partner or Pilot Logos Here
@@ -485,7 +485,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ FAQ ═══════ */}
-      <section className="section-full-bleed border-t border-[#27272a] py-24 md:py-32">
+      <section className="section-full-bleed border-t border-[#27272a] py-14 md:py-32">
         <div className="mx-auto max-w-3xl px-6">
           <FadeIn>
             <p className="section-label">FAQ</p>
@@ -527,7 +527,7 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════ CONTACT ═══════ */}
-      <section id="contact" className="section-full-bleed border-t border-[#27272a] py-24 md:py-32">
+      <section id="contact" className="section-full-bleed border-t border-[#27272a] py-14 md:py-32">
         <div className="mx-auto max-w-3xl px-6">
           <FadeIn>
             <p className="section-label">Talk to Us</p>
@@ -537,7 +537,7 @@ export default function DashboardPage() {
           </FadeIn>
 
           <FadeIn delay={100}>
-            <div className="relative mt-12 border border-[#27272a] bg-[#18181b] p-8 backdrop-blur-sm">
+            <div className="relative mt-12 border border-[#27272a] bg-[#18181b] p-5 sm:p-8 backdrop-blur-sm">
               <form className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
