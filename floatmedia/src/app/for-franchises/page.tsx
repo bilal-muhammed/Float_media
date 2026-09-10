@@ -262,7 +262,7 @@ export default function DashboardPage() {
             {benefits.map((item, i) => (
               <div
                 key={i}
-                className="group relative flex h-full flex-col border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-sm p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.15)]"
+                className="group relative flex h-full flex-col border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-sm p-5 transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] origin-bottom hover:border-[#0891b2]/30 hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.15)]"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0891b2]/0 to-transparent transition-all duration-500 group-hover:via-[#0891b2]/30" />
                 <div className="flex h-10 w-10 items-center justify-center bg-white/5 transition-colors duration-300 group-hover:bg-[#0891b2]/10">
@@ -448,7 +448,7 @@ export default function DashboardPage() {
             {industries.map((item, i) => (
               <div
                 key={i}
-                className="group flex h-full flex-col border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/20 hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.08)]"
+                className="group flex h-full flex-col border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] origin-bottom hover:border-[#0891b2]/20 hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.08)]"
               >
                 <div className="flex h-10 w-10 items-center justify-center bg-[#27272a] transition-colors duration-300 group-hover:bg-[#0891b2]/10">
                   <item.icon className="h-5 w-5 text-[#a1a1aa] transition-colors duration-300 group-hover:text-[#22d3ee]" strokeWidth={1.5} />
@@ -471,7 +471,7 @@ export default function DashboardPage() {
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="group relative flex items-center justify-center border border-[#27272a] bg-[#18181b] py-10 overflow-hidden transition-all duration-500 hover:border-[#0891b2]/20"
+                className="group relative flex items-center justify-center border border-[#27272a] bg-[#18181b] py-10 overflow-hidden transition-all duration-500 hover:scale-[1.02] origin-center hover:border-[#0891b2]/20"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0891b2]/[0.04] to-transparent bg-[length:200%_100%] animate-[shimmer_3s_infinite]" />
                 <div className="relative flex flex-col items-center gap-2 text-center">

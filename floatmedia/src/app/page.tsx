@@ -251,7 +251,7 @@ export default function LandingPage() {
                 { icon: <Eye className="h-5 w-5 text-[#0891b2] mt-0.5 shrink-0" />, title: 'Up to 95% transparent', desc: 'From inside the store you still see the street — the display reads like a perforated glass mask, giving you light control and privacy while it advertises outward.' },
               ].map((item, i) => (
                 <Reveal key={i} delay={i * 80} variant={i % 2 === 0 ? 'left' : 'right'}>
-                  <div className="group border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-0.5 hover:border-[#0891b2]/30 hover:shadow-[0_8px_30px_-10px_rgba(8,145,178,0.12)]">
+                  <div className="group border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-0.5 hover:scale-[1.02] origin-center hover:border-[#0891b2]/30 hover:shadow-[0_8px_30px_-10px_rgba(8,145,178,0.12)]">
                     <div className="flex items-start gap-3">
                       {item.icon}
                       <div>
@@ -274,7 +274,7 @@ export default function LandingPage() {
               { label: 'Flotad adapter hub', desc: 'Flotad adapter hub — small matte black box' },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 80} variant="scale">
-                <div className="group border border-[#27272a] bg-[#18181b] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30">
+                <div className="group border border-[#27272a] bg-[#18181b] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:scale-[1.03] origin-bottom hover:border-[#0891b2]/30">
                   <div className="aspect-[4/3] flex items-center justify-center border-b border-[#27272a] bg-[#0a0a0a] transition-colors group-hover:bg-[#0891b2]/[0.03]">
                     <div className="text-center px-4">
                       <Monitor className="h-10 w-10 text-[#0891b2]/20 mx-auto mb-2 transition-transform group-hover:scale-110 duration-500" />
@@ -394,7 +394,7 @@ export default function LandingPage() {
               { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <Calendar className="h-5 w-5" />, title: 'If you run events and expos', desc: 'Rent a fleet of holographic displays for the week, or bring your own, and drive every screen across the venue from one laptop for as long as the event runs.' },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 80} variant={i % 2 === 0 ? 'left' : 'right'}>
-                <div className="group bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-5 sm:p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+                <div className="group bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-5 sm:p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] origin-bottom hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-[#22d3ee]">{item.icon}</span>
                     <span className={`inline-flex items-center px-2.5 py-0.5 text-[11px] font-semibold ${item.badgeColor}`}>{item.badge}</span>
@@ -413,7 +413,7 @@ export default function LandingPage() {
               { label: 'The Service', desc: 'Maintenance, spare parts, and a studio that turns flat creative into real 3D content.' },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 80} variant="up">
-                <div className="bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-8">
+                <div className="bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-8 transition-all duration-500 hover:-translate-y-0.5 hover:scale-[1.01] origin-bottom hover:border-[#0891b2]/30">
                   <p className="section-label text-[11px] mb-3">{item.label}</p>
                   <p className="text-[14px] leading-relaxed text-white/60">{item.desc}</p>
                 </div>
