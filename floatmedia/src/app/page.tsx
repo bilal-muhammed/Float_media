@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Monitor, Smartphone, Wifi, Eye, Building2, MapPin, Calendar, Mail } from 'lucide-react';
+import { ArrowRight, Monitor, Smartphone, Wifi, Eye, Building2, MapPin, Calendar, Mail, Zap, Users } from 'lucide-react';
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,7 +19,7 @@ function useInView(threshold = 0.15) {
 
 function Reveal({ children, className = '', delay = 0, variant = 'up' }: {
   children: React.ReactNode; className?: string; delay?: number;
-  variant?: 'up' | 'left' | 'right' | 'scale' | 'blur';
+  variant?: 'up' | 'left' | 'right' | 'scale' | 'blur' | 'clip-x' | 'clip-y';
 }) {
   const { ref, visible } = useInView();
   const transforms: Record<string, string> = {
@@ -28,14 +28,22 @@ function Reveal({ children, className = '', delay = 0, variant = 'up' }: {
     right: visible ? 'translateX(0)' : 'translateX(50px)',
     scale: visible ? 'scale(1)' : 'scale(0.95)',
     blur: visible ? 'blur(0)' : 'blur(8px)',
+    'clip-x': 'none',
+    'clip-y': 'none',
   };
   const filters = variant === 'blur' && !visible ? 'blur(8px)' : 'none';
+  const clipPath = variant === 'clip-x'
+    ? (visible ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)')
+    : variant === 'clip-y'
+    ? (visible ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)')
+    : undefined;
   return (
     <div ref={ref} className={className} style={{
       opacity: visible ? 1 : 0,
       transform: transforms[variant],
       filter: variant === 'blur' ? filters : undefined,
-      transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms${variant === 'blur' ? `, filter 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms` : ''}`,
+      clipPath,
+      transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms${variant === 'blur' ? `, filter 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms` : ''}${clipPath ? `, clip-path 1s cubic-bezier(0.16,1,0.3,1) ${delay}ms` : ''}`,
     }}>
       {children}
     </div>
@@ -74,7 +82,166 @@ function CountUp({ end, suffix = '' }: { end: number; suffix?: string }) {
     };
     requestAnimationFrame(step);
   }, [visible, end]);
-  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
+  return <span ref={ref} className="count-number">{count.toLocaleString()}{suffix}</span>;
+}
+
+function TextDecode({ text, className = '', delay = 0 }: { text: string; className?: string; delay?: number }) {
+  const { ref, visible } = useInView(0.2);
+  const [display, setDisplay] = useState('');
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+  useEffect(() => {
+    if (!visible) return;
+    let frame = 0;
+    const totalFrames = text.length * 2;
+    const interval = setInterval(() => {
+      frame++;
+      const progress = frame / totalFrames;
+      const revealed = Math.floor(progress * text.length);
+      let result = '';
+      for (let i = 0; i < text.length; i++) {
+        if (i < revealed) {
+          result += text[i];
+        } else if (text[i] === ' ') {
+          result += ' ';
+        } else {
+          result += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      setDisplay(result);
+      if (frame >= totalFrames) {
+        clearInterval(interval);
+        setDisplay(text);
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }, [visible, text]);
+  return <span ref={ref} className={className} style={{ transitionDelay: `${delay}ms` }}>{display || text}</span>;
+}
+
+function SectionDivider() {
+  const { ref, visible } = useInView(0.1);
+  return (
+    <div ref={ref} className="relative py-1">
+      <div className={`section-divider ${visible ? 'is-visible' : ''}`} />
+    </div>
+  );
+}
+
+function LineReveal({ className = '', delay = 0 }: { className?: string; delay?: number }) {
+  const { ref, visible } = useInView(0.1);
+  return (
+    <div ref={ref} className={`glow-line ${visible ? 'is-visible' : ''} ${className}`} style={{ transitionDelay: `${delay}ms` }} />
+  );
+}
+
+function PerspectiveReveal({ children, className = '', delay = 0, direction = 'left' }: {
+  children: React.ReactNode; className?: string; delay?: number; direction?: 'left' | 'right';
+}) {
+  const { ref, visible } = useInView();
+  return (
+    <div ref={ref} className={className} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible
+        ? 'perspective(800px) rotateY(0deg) translateX(0)'
+        : `perspective(800px) rotateY(${direction === 'left' ? '-8' : '8'}deg) translateX(${direction === 'left' ? '-40' : '40'}px)`,
+      transition: `opacity 0.9s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  const { ref, visible } = useInView(0.2);
+  return (
+    <div ref={ref} className="section-label-premium" style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateX(0)' : 'translateX(-20px)', transition: 'all 0.6s cubic-bezier(0.16,1,0.3,1)' }}>
+      {children}
+    </div>
+  );
+}
+
+function FloatingOrbs() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="floating-orb w-[400px] h-[400px] bg-[#0891b2]/[0.04] top-[10%] left-[60%]" style={{ animationDelay: '0s' }} />
+      <div className="floating-orb w-[300px] h-[300px] bg-[#22d3ee]/[0.03] top-[50%] left-[10%]" style={{ animationDelay: '-7s' }} />
+      <div className="floating-orb w-[250px] h-[250px] bg-[#0891b2]/[0.03] top-[70%] left-[70%]" style={{ animationDelay: '-14s' }} />
+    </div>
+  );
+}
+
+function MagneticCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / centerY * -3;
+    const rotateY = (x - centerX) / centerX * 3;
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  }, []);
+  const handleMouseLeave = useCallback(() => {
+    const card = cardRef.current;
+    if (card) card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+  }, []);
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`magnetic-card ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+function HeroParticles() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    let animId: number;
+    const particles: { x: number; y: number; vx: number; vy: number; size: number; alpha: number }[] = [];
+    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    resize();
+    window.addEventListener('resize', resize);
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.3 + 0.1,
+      });
+    }
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(8, 145, 178, ${p.alpha})`;
+        ctx.fill();
+      });
+      animId = requestAnimationFrame(draw);
+    };
+    draw();
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+  }, []);
+  return <canvas ref={canvasRef} className="absolute inset-0 z-[1] pointer-events-none" />;
 }
 
 export default function LandingPage() {
@@ -88,11 +255,14 @@ export default function LandingPage() {
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         </div>
+        <FloatingOrbs />
+        <HeroParticles />
 
         <div className="absolute inset-0 z-10 flex items-center">
           <div className="px-6 lg:px-8 w-full max-w-[1200px] mx-auto">
             <Reveal>
               <div className="inline-flex items-center border border-white/20 bg-[#18181b]/10 backdrop-blur-sm px-4 py-1.5 text-[12px] font-medium text-white/80 mb-6">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#22d3ee] animate-pulse mr-2" />
                 A one-stop platform for next-gen advertising
               </div>
             </Reveal>
@@ -103,7 +273,7 @@ export default function LandingPage() {
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                 filter: 'drop-shadow(0 0 30px rgba(8, 145, 178, 0.3))',
               }}>
-                Every screen you own, on one canvas.
+                <TextDecode text="Every screen you own, on one canvas." />
               </h1>
             </Reveal>
 
@@ -115,7 +285,7 @@ export default function LandingPage() {
 
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link href="/for-franchises" className="group inline-flex items-center gap-2 bg-[#0891b2] px-7 py-3.5 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_40px_-8px_rgba(8,145,178,0.5)]">
+                <Link href="https://wa.me/919497672692" className="group inline-flex items-center gap-2 bg-[#0891b2] px-7 py-3.5 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_40px_-8px_rgba(8,145,178,0.5)] btn-shine">
                   Book a demo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link href="/for-franchises" className="inline-flex items-center gap-2 border border-white/20 bg-[#18181b]/5 backdrop-blur-sm px-7 py-3.5 text-[14px] font-medium text-white/90 hover:bg-[#18181b]/10 hover:border-white/30 transition-all">
@@ -125,14 +295,20 @@ export default function LandingPage() {
             </Reveal>
           </div>
         </div>
+        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10" />
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
+          <div className="w-5 h-8 rounded-full border-2 border-white/30 flex justify-center pt-1.5 animate-bounce">
+            <div className="w-1 h-2 rounded-full bg-white/50" />
+          </div>
+        </div>
       </section>
 
+      <SectionDivider />
+
       {/* ─── WHAT WE DO ─── */}
-      <section className="relative z-10 bg-[#0a0a0a] pt-8 pb-14 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
-        <Reveal>
-          <p className="section-label mb-3">What we do</p>
-        </Reveal>
-        <HeadingReveal className="section-title max-w-[700px]" delay={60}>
+      <section className="relative z-10 pt-8 pb-14 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+        <SectionLabel>What we do</SectionLabel>
+        <HeadingReveal className="section-title max-w-[700px] mt-3" delay={60}>
           Today a campaign moves by pen drive. With Flotad it moves in one click.
         </HeadingReveal>
         <Reveal delay={120}>
@@ -141,17 +317,17 @@ export default function LandingPage() {
           </p>
         </Reveal>
 
-        {/* 3 Steps */}
+        {/* 3 Steps — stagger from different directions */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             { num: '01', label: 'Create', title: 'One brief, every format', desc: 'Your creative is resized for every screen in the network — window, aisle, counter, holographic. No agency round trip for a weekend offer.',
-              icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg> },
+              icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>, variant: 'left' as const },
             { num: '02', label: 'Target', title: 'Right content, right screen', desc: 'Choose the cities, stores, screens and hours. Each screen gets what suits it — not the same loop everywhere.',
-              icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg> },
+              icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>, variant: 'up' as const },
             { num: '03', label: 'Publish & Prove', title: 'Live in one click', desc: 'Nothing to courier, email or plug in. Every screen reports what it played and when.',
-              icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" /></svg> },
+              icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" /></svg>, variant: 'right' as const },
           ].map((step, i) => (
-            <Reveal key={i} delay={i * 100} variant="scale">
+            <Reveal key={i} delay={i * 150} variant={step.variant}>
               <div className="group relative border border-[#27272a] bg-[#18181b] px-5 py-4 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0891b2]/0 to-transparent transition-all duration-500 group-hover:via-[#0891b2]/40" />
                 <div className="flex items-start justify-between mb-3">
@@ -174,8 +350,8 @@ export default function LandingPage() {
 
         {/* Two feature cards */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-          <Reveal variant="left">
-            <div className="group relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+          <Reveal variant="left" delay={100}>
+            <MagneticCard className="group relative overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
               <div className="aspect-[3/2] overflow-hidden">
                 <img src="/medias/floatAd_product1.jpg" alt="Transparent film and holographic display" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
@@ -187,10 +363,10 @@ export default function LandingPage() {
                   Transparent film on your glass facade. Hanging panels. Dual-sided screens. No new structure, no permit, no extra infrastructure.
                 </p>
               </div>
-            </div>
+            </MagneticCard>
           </Reveal>
-          <Reveal variant="right">
-            <div className="group relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+          <Reveal variant="right" delay={200}>
+            <MagneticCard className="group relative overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
               <div className="aspect-[3/2] overflow-hidden">
                 <img src="/medias/floatAd_product2.jpg" alt="Flotad dashboard" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
@@ -202,24 +378,17 @@ export default function LandingPage() {
                   Holographic displays and the screens already in your stores — one dashboard, from a laptop or a phone.
                 </p>
               </div>
-            </div>
+            </MagneticCard>
           </Reveal>
         </div>
       </section>
 
       {/* ─── HOLOGRAPHIC DISPLAY ─── */}
       <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0891b2]/[0.04] via-transparent to-[#0891b2]/[0.02]" />
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-[#0891b2]/[0.04] rounded-full blur-[60px] md:blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-[#0891b2]/[0.03] rounded-full blur-[50px] md:blur-[100px]" />
-        </div>
 
         <div className="max-w-[1200px] mx-auto">
-          <Reveal>
-            <p className="section-label mb-4">The Holographic Display</p>
-          </Reveal>
-          <HeadingReveal className="section-title max-w-[600px]" delay={60}>
+          <SectionLabel>The Holographic Display</SectionLabel>
+          <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
             Turn your store frontage into a DOOH screen.
           </HeadingReveal>
           <Reveal delay={120}>
@@ -229,16 +398,14 @@ export default function LandingPage() {
           </Reveal>
 
           <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_minmax(300px,380px)] gap-8 items-start">
-            <Reveal variant="scale">
+            <Reveal variant="scale" delay={200}>
               <div className="relative border border-[#27272a] bg-[#18181b] overflow-hidden aspect-[16/10]">
-                <div className="absolute inset-0 scale-110 origin-top">
-                  <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-                    <source src="/medias/float_add_3rd_media.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div className="absolute top-4 left-4 z-10 inline-flex items-center border border-[#27272a] bg-[#18181b]/80 backdrop-blur px-3 py-1 text-[11px] font-medium text-[#a1a1aa]">
+                <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                  <source src="/medias/float_add_3rd_media.mp4" type="video/mp4" />
+                </video>
+                {/* <div className="absolute top-4 left-4 z-10 inline-flex items-center border border-[#27272a] bg-[#18181b]/80 backdrop-blur px-3 py-1 text-[11px] font-medium text-[#a1a1aa]">
                   Implementation video · 60–90 sec
-                </div>
+                </div> */}
               </div>
             </Reveal>
 
@@ -250,7 +417,7 @@ export default function LandingPage() {
                 { icon: <Smartphone className="h-5 w-5 text-[#0891b2] mt-0.5 shrink-0" />, title: 'AI content conversion', desc: 'We turn your flat creative into depth content built for holographic playback.' },
                 { icon: <Eye className="h-5 w-5 text-[#0891b2] mt-0.5 shrink-0" />, title: 'Up to 95% transparent', desc: 'From inside the store you still see the street — the display reads like a perforated glass mask, giving you light control and privacy while it advertises outward.' },
               ].map((item, i) => (
-                <Reveal key={i} delay={i * 80} variant={i % 2 === 0 ? 'left' : 'right'}>
+                <PerspectiveReveal key={i} delay={i * 100} direction={i % 2 === 0 ? 'left' : 'right'}>
                   <div className="group border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-0.5 hover:scale-[1.02] origin-center hover:border-[#0891b2]/30 hover:shadow-[0_8px_30px_-10px_rgba(8,145,178,0.12)]">
                     <div className="flex items-start gap-3">
                       {item.icon}
@@ -260,7 +427,7 @@ export default function LandingPage() {
                       </div>
                     </div>
                   </div>
-                </Reveal>
+                </PerspectiveReveal>
               ))}
             </div>
           </div>
@@ -291,14 +458,13 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* ─── INSIDE FLOTAD ─── */}
       <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
-        <div className="border-t border-[#27272a] pt-14 md:pt-24" />
 
-        <Reveal>
-          <p className="section-label mb-4">Inside Flotad</p>
-        </Reveal>
-        <HeadingReveal className="section-title max-w-[600px]" delay={60}>
+        <SectionLabel>Inside Flotad</SectionLabel>
+        <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
           Hundreds of store displays, at your fingertips.
         </HeadingReveal>
         <Reveal delay={120}>
@@ -368,16 +534,17 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* ─── THE BIGGER PICTURE ─── */}
       <section className="relative py-14 md:py-24 px-6 lg:px-8 overflow-hidden" style={{ isolation: 'isolate' }}>
         <img src="/images/2nd_banner.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: -2 }} />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/30 to-[#0a0a0a]/60" style={{ zIndex: -1 }} />
+        <FloatingOrbs />
 
         <div className="max-w-[1200px] mx-auto">
-          <Reveal>
-            <p className="section-label mb-4">The Bigger Picture</p>
-          </Reveal>
-          <HeadingReveal className="section-title max-w-[600px]" delay={60}>
+          <SectionLabel>The Bigger Picture</SectionLabel>
+          <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
             One network. Four ways to use it.
           </HeadingReveal>
           <Reveal delay={120}>
@@ -386,14 +553,15 @@ export default function LandingPage() {
             </p>
           </Reveal>
 
+          {/* 4 cards — stagger in from different corners */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px">
             {[
-              { badge: 'Live first', badgeColor: 'bg-[#0891b2]/20 text-[#22d3ee]', icon: <Building2 className="h-5 w-5" />, title: 'If you run a chain of stores', desc: 'Control every screen in every branch from one login — the ones you own today and the holographic ones you add later. Your ad space, your content, your schedule.' },
-              { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <MapPin className="h-5 w-5" />, title: 'If you want to advertise', desc: "Book time on someone else's holographic window by the minute, from your phone. Pick the location, pick the hour, upload, pay. No sales call, no monthly contract." },
-              { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <Monitor className="h-5 w-5" />, title: 'If you own the footfall', desc: 'Malls, cafés, showrooms, lobbies — turn a window or a wall into earning ad space. We install, the platform fills the time, you take a share of what it makes.' },
-              { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <Calendar className="h-5 w-5" />, title: 'If you run events and expos', desc: 'Rent a fleet of holographic displays for the week, or bring your own, and drive every screen across the venue from one laptop for as long as the event runs.' },
+              { badge: 'Live first', badgeColor: 'bg-[#0891b2]/20 text-[#22d3ee]', icon: <Building2 className="h-5 w-5" />, title: 'If you run a chain of stores', desc: 'Control every screen in every branch from one login — the ones you own today and the holographic ones you add later. Your ad space, your content, your schedule.', variant: 'left' as const },
+              { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <MapPin className="h-5 w-5" />, title: 'If you want to advertise', desc: "Book time on someone else's holographic window by the minute, from your phone. Pick the location, pick the hour, upload, pay. No sales call, no monthly contract.", variant: 'right' as const },
+              { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <Monitor className="h-5 w-5" />, title: 'If you own the footfall', desc: 'Malls, cafés, showrooms, lobbies — turn a window or a wall into earning ad space. We install, the platform fills the time, you take a share of what it makes.', variant: 'left' as const },
+              { badge: 'Next', badgeColor: 'bg-white/10 text-white/60', icon: <Calendar className="h-5 w-5" />, title: 'If you run events and expos', desc: 'Rent a fleet of holographic displays for the week, or bring your own, and drive every screen across the venue from one laptop for as long as the event runs.', variant: 'right' as const },
             ].map((item, i) => (
-              <Reveal key={i} delay={i * 80} variant={i % 2 === 0 ? 'left' : 'right'}>
+              <Reveal key={i} delay={i * 120} variant={item.variant}>
                 <div className="group bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-5 sm:p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] origin-bottom hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-[#22d3ee]">{item.icon}</span>
@@ -412,7 +580,7 @@ export default function LandingPage() {
               { label: 'The Platform', desc: 'Flotad runs every screen on that space — owned, rented, or already in the store.' },
               { label: 'The Service', desc: 'Maintenance, spare parts, and a studio that turns flat creative into real 3D content.' },
             ].map((item, i) => (
-              <Reveal key={i} delay={i * 80} variant="up">
+              <Reveal key={i} delay={i * 120} variant="blur">
                 <div className="bg-[#0a0a0a]/70 backdrop-blur-sm border border-white/10 p-8 transition-all duration-500 hover:-translate-y-0.5 hover:scale-[1.01] origin-bottom hover:border-[#0891b2]/30">
                   <p className="section-label text-[11px] mb-3">{item.label}</p>
                   <p className="text-[14px] leading-relaxed text-white/60">{item.desc}</p>
@@ -429,36 +597,117 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── TALK TO US ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
-        <div className="border-t border-[#27272a] pt-14 md:pt-24" />
+      <SectionDivider />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
-          <div>
-            <Reveal>
-              <p className="section-label mb-4">Talk to us</p>
-            </Reveal>
-            <HeadingReveal className="section-title max-w-[400px]" delay={60}>
-              Tell us what you want to achieve.
-            </HeadingReveal>
-            <Reveal delay={120}>
-              <p className="section-subtitle mt-5">
-                Control of the screens you already have, a holographic window that stops people outside, or both. Say what you are aiming for and we will come back with how to get there — and what it costs.
-              </p>
-            </Reveal>
-            <Reveal delay={180}>
-              <div className="mt-8 space-y-3">
-                <a href="mailto:hello@flotad.com" className="flex items-center gap-2 text-[14px] text-[#a1a1aa] hover:text-[#fafafa] transition-colors">
-                  <Mail className="h-4 w-4" /> hello@flotad.com
-                </a>
-                <p className="text-[14px] text-[#71717a]">
-                  Flot Media LLP · Registered office: Pathanamthitta, Kerala, India
-                </p>
-              </div>
-            </Reveal>
+      {/* ─── HOW IT WORKS — TIMELINE ─── */}
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+        <SectionLabel>How It Works</SectionLabel>
+        <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
+          From first call to a live screen.
+        </HeadingReveal>
+        <Reveal delay={120}>
+          <p className="section-subtitle mt-5 max-w-xl">
+            A simple four-step rollout. One branch first. Your team proves the workflow. Then store by store.
+          </p>
+        </Reveal>
+
+        {/* Horizontal timeline on desktop, vertical on mobile */}
+        <div className="mt-16 relative">
+          {/* Connecting line */}
+          <div className="hidden md:block absolute top-[22px] left-0 right-0 h-px">
+            <LineReveal delay={300} />
           </div>
 
-          <Reveal delay={100} variant="right">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+            {[
+              { step: '01', title: 'Screen survey', desc: 'We map what you already have — screens per store, inputs, which locations matter.', icon: <Monitor className="h-5 w-5" /> },
+              { step: '02', title: 'Pilot branch', desc: 'Adapters and an edge box go into one store. Your team publishes a real campaign that week.', icon: <Zap className="h-5 w-5" /> },
+              { step: '03', title: 'Network onboarding', desc: 'Store by store, your branding on the portal, roles set up per team.', icon: <Users className="h-5 w-5" /> },
+              { step: '04', title: 'Holographic upgrades', desc: 'Add transparent or hanging displays at flagship locations when the budget allows.', icon: <Eye className="h-5 w-5" /> },
+            ].map((item, i) => (
+              <PerspectiveReveal key={i} delay={i * 150} direction={i % 2 === 0 ? 'left' : 'right'}>
+                <div className="group relative">
+                  {/* Step circle */}
+                  <div className="relative z-10 flex h-11 w-11 items-center justify-center border border-[#27272a] bg-[#0a0a0a] text-[12px] font-bold text-[#0891b2]/60 transition-all duration-500 group-hover:border-[#0891b2]/50 group-hover:text-[#22d3ee] group-hover:bg-[#0891b2]/[0.06] group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(8,145,178,0.3)]">
+                    {item.step}
+                  </div>
+
+                  {/* Card */}
+                  <div className="mt-5 border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#0891b2]/20 group-hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.1)]">
+                    <div className="flex h-9 w-9 items-center justify-center bg-[#27272a] transition-colors duration-300 group-hover:bg-[#0891b2]/10">
+                      <span className="text-[#a1a1aa] transition-colors duration-300 group-hover:text-[#22d3ee]">{item.icon}</span>
+                    </div>
+                    <h3 className="mt-4 text-[14px] font-semibold text-[#fafafa]">{item.title}</h3>
+                    <p className="mt-2 text-[12px] leading-[1.7] text-[#a1a1aa]">{item.desc}</p>
+                  </div>
+                </div>
+              </PerspectiveReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* ─── CTA BANNER ─── */}
+      <section className="relative py-16 md:py-24 px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0891b2]/[0.06] via-[#0a0a0a] to-[#22d3ee]/[0.04]" />
+        <FloatingOrbs />
+        <div className="relative max-w-[800px] mx-auto text-center">
+          <Reveal variant="scale" delay={0}>
+            <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-[1.15] text-white">
+              Ready to see it in your store?
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={150}>
+            <p className="mt-5 text-[15px] leading-[1.7] text-white/60 max-w-[500px] mx-auto">
+              Book a 15-minute demo. We will show you the platform, the hardware, and what it costs for your network.
+            </p>
+          </Reveal>
+          <Reveal variant="up" delay={300}>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Link href="https://wa.me/919497672692" className="group inline-flex items-center gap-2 bg-[#0891b2] px-8 py-4 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_50px_-10px_rgba(8,145,178,0.5)] btn-shine">
+                Book a demo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link href="/for-franchises" className="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-8 py-4 text-[14px] font-medium text-white/90 backdrop-blur-sm transition hover:bg-white/10 hover:border-white/30">
+                Explore franchise model
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* ─── TALK TO US ─── */}
+      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
+          <PerspectiveReveal direction="left">
+            <div>
+              <SectionLabel>Talk to us</SectionLabel>
+              <HeadingReveal className="section-title max-w-[400px] mt-4" delay={60}>
+                Tell us what you want to achieve.
+              </HeadingReveal>
+              <Reveal delay={120}>
+                <p className="section-subtitle mt-5">
+                  Control of the screens you already have, a holographic window that stops people outside, or both. Say what you are aiming for and we will come back with how to get there — and what it costs.
+                </p>
+              </Reveal>
+              <Reveal delay={180}>
+                <div className="mt-8 space-y-3">
+                  <a href="mailto:hello@flotad.com" className="flex items-center gap-2 text-[14px] text-[#a1a1aa] hover:text-[#fafafa] transition-colors">
+                    <Mail className="h-4 w-4" /> hello@flotad.com
+                  </a>
+                  <p className="text-[14px] text-[#71717a]">
+                    Flot Media LLP · Registered office: Pathanamthitta, Kerala, India
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </PerspectiveReveal>
+
+          <PerspectiveReveal direction="right" delay={100}>
             <form className="border border-[#27272a] bg-[#18181b] p-5 sm:p-8 space-y-5" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -484,12 +733,12 @@ export default function LandingPage() {
                 <label className="block text-[12px] font-medium text-[#a1a1aa] mb-1.5">What do you want to achieve?</label>
                 <textarea rows={4} placeholder="e.g. one dashboard for all our stores, and a holographic window at the flagship" className="input-field resize-none" />
               </div>
-              <button type="submit" className="group w-full bg-[#0891b2] px-5 py-3.5 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_40px_-8px_rgba(8,145,178,0.5)] flex items-center justify-center gap-2">
+              <button type="submit" className="group w-full bg-[#0891b2] px-5 py-3.5 text-[14px] font-semibold text-white hover:bg-[#0e7490] transition-all hover:shadow-[0_0_40px_-8px_rgba(8,145,178,0.5)] flex items-center justify-center gap-2 btn-shine">
                 Start the conversation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <p className="text-center text-[12px] text-[#71717a]">Mockup form — no data is submitted.</p>
             </form>
-          </Reveal>
+          </PerspectiveReveal>
         </div>
       </section>
     </div>

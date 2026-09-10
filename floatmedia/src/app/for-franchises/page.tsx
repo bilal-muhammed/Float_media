@@ -143,6 +143,8 @@ export default function DashboardPage() {
       <section className="relative flex items-center overflow-hidden py-16 md:py-36">
         <div className="absolute inset-0">
           <div className="absolute left-1/2 top-0 h-[300px] w-[300px] md:h-[600px] md:w-[600px] -translate-x-1/2 bg-[#0891b2]/[0.03] blur-[60px] md:blur-[120px]" />
+          <div className="floating-orb w-[200px] h-[200px] bg-[#22d3ee]/[0.03] top-[20%] left-[70%]" style={{ animationDelay: '-5s' }} />
+          <div className="floating-orb w-[150px] h-[150px] bg-[#0891b2]/[0.04] top-[60%] left-[10%]" style={{ animationDelay: '-12s' }} />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6">
@@ -156,16 +158,10 @@ export default function DashboardPage() {
           <div className="relative border border-[#27272a] bg-[#18181b] p-1 backdrop-blur-md">
             <div className="border border-[#27272a] bg-[#18181b] p-7 md:p-12">
               <FadeIn delay={100}>
-                <h1 className="group text-[2rem] font-bold leading-[1.1] text-[#fafafa] md:text-[3.5rem] cursor-default">
-                  {'Your marketing team should not be couriering pen drives.'.split('').map((char, i) => (
-                    <span
-                      key={i}
-                      className="inline-block transition-colors duration-300 group-hover:text-[#22d3ee]"
-                      style={{ transitionDelay: `${i * 15}ms` }}
-                    >
-                      {char === ' ' ? '\u00A0' : char}
-                    </span>
-                  ))}
+                <h1 className="group relative text-[2rem] font-bold leading-[1.15] text-[#fafafa] md:text-[3.5rem] max-w-[800px]">
+                  <span className="block">Your marketing team should not</span>
+                  <span className="block">be couriering pen drives.</span>
+                  <span className="block h-[3px] w-0 bg-gradient-to-r from-[#0891b2] to-[#22d3ee] transition-all duration-500 ease-out group-hover:w-full mt-3" />
                 </h1>
               </FadeIn>
 
@@ -175,12 +171,12 @@ export default function DashboardPage() {
                 </p>
               </FadeIn>
 
-              <FadeIn delay={300}>
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link
-                    href="#contact"
-                    className="group inline-flex items-center gap-2 bg-[#0891b2] px-6 py-3.5 text-[13px] font-semibold text-white transition-all hover:bg-[#0e7490] hover:shadow-[0_0_60px_-12px_rgba(8,145,178,0.6)]"
-                  >
+          <FadeIn delay={300}>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="#contact"
+                className="group inline-flex items-center gap-2 bg-[#0891b2] px-6 py-3.5 text-[13px] font-semibold text-white transition-all hover:bg-[#0e7490] hover:shadow-[0_0_60px_-12px_rgba(8,145,178,0.6)] btn-shine"
+              >
                     Talk to us
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </Link>
@@ -232,7 +228,8 @@ export default function DashboardPage() {
             </FadeIn>
 
             <FadeIn direction="right" delay={200}>
-              <div className="border border-[#0891b2]/10 bg-[#0891b2]/[0.02] p-6 md:p-8">
+              <div className="border border-[#0891b2]/10 bg-[#0891b2]/[0.02] p-6 md:p-8 relative">
+                <div className="absolute inset-0 border border-[#0891b2]/20 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#22d3ee]">On Flotad</p>
                 <ul className="mt-6 space-y-4">
                   {flotadItems.map((item, i) => (
@@ -374,9 +371,9 @@ export default function DashboardPage() {
                   <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                     <source src="/medias/for_franchies_banner.mp4" type="video/mp4" />
                   </video>
-                  <div className="absolute top-3 left-3 md:top-6 md:left-6 z-10 border border-[#27272a] bg-[#0a0a0a]/90 px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-[11px] font-medium text-[#a1a1aa] backdrop-blur-sm">
+                  {/* <div className="absolute top-3 left-3 md:top-6 md:left-6 z-10 border border-[#27272a] bg-[#0a0a0a]/90 px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-[11px] font-medium text-[#a1a1aa] backdrop-blur-sm">
                     Install walkthrough
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -573,7 +570,7 @@ export default function DashboardPage() {
                 </div>
                 <button
                   type="submit"
-                  className="group inline-flex items-center gap-2 bg-[#0891b2] px-6 py-3.5 text-[13px] font-semibold text-white transition-all hover:bg-[#0e7490] hover:shadow-[0_0_60px_-12px_rgba(8,145,178,0.6)]"
+                  className="group inline-flex items-center gap-2 bg-[#0891b2] px-6 py-3.5 text-[13px] font-semibold text-white transition-all hover:bg-[#0e7490] hover:shadow-[0_0_60px_-12px_rgba(8,145,178,0.6)] btn-shine"
                 >
                   Talk to us
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
