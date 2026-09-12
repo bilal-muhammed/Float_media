@@ -278,7 +278,7 @@ export default function LandingPage() {
             </Reveal>
 
             <Reveal delay={160}>
-              <p className="mt-5 text-[16px] leading-[1.7] text-white/60 max-w-[480px]">
+              <p className="mt-5 text-[17px] leading-[1.7] text-white/60 max-w-[480px]">
                 Your shop window becomes the billboard. Your phone becomes the control room. No pen drives, no agency wait, no new structure to build.
               </p>
             </Reveal>
@@ -307,6 +307,9 @@ export default function LandingPage() {
 
       {/* ─── WHAT WE DO ─── */}
       <section className="relative z-10 pt-8 pb-14 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(8,145,178,0.08),transparent)] pointer-events-none" />
+        <div className="absolute top-10 left-[10%] h-64 w-64 rounded-full bg-[#0891b2]/[0.03] blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-10 right-[10%] h-48 w-48 rounded-full bg-[#22d3ee]/[0.03] blur-[80px] pointer-events-none" />
         <SectionLabel>What we do</SectionLabel>
         <HeadingReveal className="section-title max-w-[700px] mt-3" delay={60}>
           Today a campaign moves by pen drive. With Flotad it moves in one click.
@@ -342,7 +345,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <h4 className="text-[16px] font-semibold text-[#fafafa] leading-snug">{step.title}</h4>
-                <p className="mt-1.5 text-[12px] leading-relaxed text-[#a1a1aa]">{step.desc}</p>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-[#a1a1aa]">{step.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -423,7 +426,7 @@ export default function LandingPage() {
                       {item.icon}
                       <div>
                         <h4 className="text-[14px] font-semibold text-[#fafafa]">{item.title}</h4>
-                        <p className="text-[13px] text-[#a1a1aa] mt-1">{item.desc}</p>
+                        <p className="text-[14px] text-[#a1a1aa] mt-1">{item.desc}</p>
                       </div>
                     </div>
                   </div>
@@ -449,7 +452,7 @@ export default function LandingPage() {
                     </div>
                   </div>
                   <div className="p-3">
-                    <p className="text-[12px] text-[#a1a1aa]">{item.label}</p>
+                    <p className="text-[13px] text-[#a1a1aa]">{item.label}</p>
                   </div>
                 </div>
               </Reveal>
@@ -638,7 +641,7 @@ export default function LandingPage() {
                       <span className="text-[#a1a1aa] transition-colors duration-300 group-hover:text-[#22d3ee]">{item.icon}</span>
                     </div>
                     <h3 className="mt-4 text-[14px] font-semibold text-[#fafafa]">{item.title}</h3>
-                    <p className="mt-2 text-[12px] leading-[1.7] text-[#a1a1aa]">{item.desc}</p>
+                    <p className="mt-2 text-[13px] leading-[1.7] text-[#a1a1aa]">{item.desc}</p>
                   </div>
                 </div>
               </PerspectiveReveal>

@@ -14,7 +14,7 @@ export default function Footer() {
                 <span className="text-[8px] font-semibold tracking-[0.2em] text-[#22d3ee] uppercase mt-[2px]">Beyond Billboards</span>
               </div>
             </Link>
-            <p className="mt-4 text-[13px] leading-relaxed text-[#a1a1aa]">
+            <p className="mt-4 text-[14px] leading-relaxed text-[#a1a1aa]">
               A one-stop platform for next-gen advertising: 3D holographic displays, and Flotad — the software that runs your whole screen network from one login.
             </p>
           </div>
