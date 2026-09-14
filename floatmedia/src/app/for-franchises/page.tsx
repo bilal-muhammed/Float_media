@@ -236,8 +236,12 @@ export default function DashboardPage() {
           <FadeIn>
             <SectionLabel>The Change</SectionLabel>
             <h2 className="section-title mt-4 text-[1.5rem] md:text-[2rem]">
-              <SplitText text="What a campaign costs you today." />
+              {/* <SplitText text="What a campaign costs you today." /> */}
+              <SplitText text="A side-by-side look at the old way versus the Flotad way." />
             </h2>
+            {/* <p className="section-subtitle mt-4 max-w-2xl">
+              A side-by-side look at the old way versus the Flotad way.
+            </p> */}
           </FadeIn>
 
           <div className="relative mt-14 grid gap-6 md:grid-cols-2">
@@ -246,24 +250,29 @@ export default function DashboardPage() {
             </div>
 
             <FadeIn direction="left" delay={100}>
-              <div className="border border-[#27272a] bg-[#18181b] p-6 md:p-8 h-full">
-                <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#a1a1aa]">Today · Manual</p>
-                <ul className="mt-6 space-y-4">
-                  {todayItems.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center bg-[#ef4444]/10">
-                        <XIcon className="h-3 w-3 text-[#ef4444]" />
-                      </div>
-                      <span className="text-[14px] leading-[1.7] text-[#a1a1aa]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="h-full">
+                <h3 className="text-[1.25rem] md:text-[1.5rem] font-bold text-[#fafafa] mb-4">
+                  <SplitText text="What a campaign costs you today." />
+                </h3>
+                <div className="border border-[#27272a] bg-[#18181b] p-6 md:p-8 h-full">
+                  <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#a1a1aa]">Today · Manual</p>
+                  <ul className="mt-6 space-y-4">
+                    {todayItems.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center bg-[#ef4444]/10">
+                          <XIcon className="h-3 w-3 text-[#ef4444]" />
+                        </div>
+                        <span className="text-[14px] leading-[1.7] text-[#a1a1aa]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </FadeIn>
 
             <FadeIn direction="right" delay={200}>
-              <div className="h-full flex flex-col">
-                <h3 className="section-title text-[1.25rem] md:text-[1.5rem] mb-4">
+              <div className="h-full">
+                <h3 className="text-[1.25rem] md:text-[1.5rem] font-bold text-[#fafafa] mb-4">
                   <SplitText text="What it costs on Flotad." />
                 </h3>
                 <div className="border border-[#0891b2]/10 bg-[#0891b2]/[0.02] p-6 md:p-8 relative h-full">
@@ -365,10 +374,10 @@ export default function DashboardPage() {
       <section className="section-full-bleed py-14 md:py-36">
         <div className="mx-auto max-w-[90rem] px-6">
           <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start md:gap-8">
-            <div className="flex flex-col justify-center overflow-hidden">
+            <div className="flex flex-col justify-center">
               <FadeIn direction="left">
                 <SectionLabel>The Upgrade Nobody Else Offers</SectionLabel>
-                <h2 className="section-title mt-4 text-[1.5rem] md:text-[2rem]">
+                <h2 className="mt-4 text-[1.5rem] md:text-[2rem] font-bold leading-[1.15] text-[#fafafa] tracking-[-0.02em]">
                   <SplitText text="Turn a conventional ad into a real 3D experience." />
                 </h2>
                 <p className="mt-5 text-[14px] leading-[1.75] text-[#a1a1aa]">
