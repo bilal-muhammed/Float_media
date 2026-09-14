@@ -48,7 +48,6 @@ function SplitText({ text, className }: { text: string; className?: string }) {
       {words.map((word, i) => (
         <span key={i} className="word">
           <span className="word-inner">{word}</span>
-          {i < words.length - 1 && ' '}
         </span>
       ))}
     </span>
@@ -251,12 +250,12 @@ export default function DashboardPage() {
 
             <FadeIn direction="left" delay={100}>
               <div className="h-full">
-                <h3 className="text-[1.25rem] md:text-[1.5rem] font-bold text-[#fafafa] mb-4">
+                <h3 className="text-[1.25rem] md:text-[1.5rem] font-bold text-[#fafafa] mb-3">
                   <SplitText text="What a campaign costs you today." />
                 </h3>
-                <div className="border border-[#27272a] bg-[#18181b] p-6 md:p-8 h-full">
+                <div className="border border-[#27272a] bg-[#18181b] p-5 md:p-6 h-full">
                   <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#a1a1aa]">Today · Manual</p>
-                  <ul className="mt-6 space-y-4">
+                  <ul className="mt-4 space-y-3">
                     {todayItems.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center bg-[#ef4444]/10">
@@ -272,13 +271,13 @@ export default function DashboardPage() {
 
             <FadeIn direction="right" delay={200}>
               <div className="h-full">
-                <h3 className="text-[1.25rem] md:text-[1.5rem] font-bold text-[#fafafa] mb-4">
+                <h3 className="text-[1.25rem] md:text-[1.5rem] font-bold text-[#fafafa] mb-3">
                   <SplitText text="What it costs on Flotad." />
                 </h3>
-                <div className="border border-[#0891b2]/10 bg-[#0891b2]/[0.02] p-6 md:p-8 relative h-full">
+                <div className="border border-[#0891b2]/10 bg-[#0891b2]/[0.02] p-5 md:p-6 relative h-full">
                   <div className="absolute inset-0 border border-[#0891b2]/20 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#22d3ee]">On Flotad</p>
-                  <ul className="mt-6 space-y-4">
+                  <ul className="mt-4 space-y-3">
                     {flotadItems.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center bg-[#0891b2]/10">
@@ -336,7 +335,7 @@ export default function DashboardPage() {
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn>
             <SectionLabel>Flash Campaigns</SectionLabel>
-            <h2 className="section-title mt-4 text-[1.5rem] md:text-[2rem] max-w-3xl">
+            <h2 className="mt-4 text-[1.5rem] md:text-[2rem] font-bold leading-[1.15] text-[#fafafa] tracking-[-0.02em] max-w-3xl">
               <SplitText text="A four-hour sale, in the eleven stores where it matters." />
             </h2>
             <p className="section-subtitle mt-4 max-w-2xl">
@@ -345,18 +344,18 @@ export default function DashboardPage() {
           </FadeIn>
 
           <div className="mt-14 sm:mt-18">
-            <StaggerContainer className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4" delay={100}>
+            <StaggerContainer className="gap-5 sm:grid-cols-2 lg:grid-cols-4 items-stretch" delay={100}>
               {steps.map((item, i) => (
-                <div key={i} className="group relative">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="relative z-10 flex h-10 w-10 items-center justify-center border border-[#27272a] bg-[#0a0a0a] text-[12px] font-bold text-[#0891b2]/60 transition-all duration-300 group-hover:border-[#0891b2]/40 group-hover:text-[#22d3ee] group-hover:bg-[#0891b2]/[0.06]">
+                <div key={i} className="group relative flex flex-col h-full">
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="relative z-10 flex h-10 w-10 items-center justify-center border border-[#27272a] bg-[#0a0a0a] text-[12px] font-bold text-[#0891b2]/60 transition-all duration-300 group-hover:border-[#22d3ee]/60 group-hover:text-[#22d3ee] group-hover:bg-[#22d3ee]/10 group-hover:shadow-[0_0_15px_-3px_rgba(34,211,238,0.4)]">
                       {item.step}
                     </span>
-                    <div className="hidden h-px flex-1 bg-gradient-to-r from-[#27272a] to-transparent lg:block" />
+                    <div className="hidden h-px flex-1 bg-gradient-to-r from-[#27272a] to-transparent lg:block transition-all duration-500 group-hover:from-[#22d3ee]/30" />
                   </div>
 
-                  <div className="flex h-full flex-col border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
-                    <div className="flex h-10 w-10 items-center justify-center bg-[#27272a] transition-colors duration-300 group-hover:bg-[#0891b2]/10">
+                  <div className="flex-1 flex flex-col border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#0891b2]/30 hover:shadow-[0_20px_50px_-15px_rgba(8,145,178,0.15)]">
+                    <div className="flex h-10 w-10 items-center justify-center bg-[#27272a] transition-all duration-300 group-hover:bg-[#0891b2]/10 group-hover:scale-110">
                       <item.icon className="h-5 w-5 text-[#a1a1aa] transition-colors duration-300 group-hover:text-[#22d3ee]" strokeWidth={1.5} />
                     </div>
                     <h3 className="mt-4 text-[15px] font-semibold text-[#fafafa]">{item.title}</h3>
@@ -373,8 +372,8 @@ export default function DashboardPage() {
       <SectionDivider />
       <section className="section-full-bleed py-14 md:py-36">
         <div className="mx-auto max-w-[90rem] px-6">
-          <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start md:gap-8">
-            <div className="flex flex-col justify-center">
+          <div className="grid gap-8 md:grid-cols-[0.45fr_1fr] md:items-center md:gap-10">
+            <div className="flex flex-col justify-center max-w-lg">
               <FadeIn direction="left">
                 <SectionLabel>The Upgrade Nobody Else Offers</SectionLabel>
                 <h2 className="mt-4 text-[1.5rem] md:text-[2rem] font-bold leading-[1.15] text-[#fafafa] tracking-[-0.02em]">
@@ -393,11 +392,11 @@ export default function DashboardPage() {
                     'Dual-sided panels play a different message to each direction of foot traffic.',
                     'Start with one flagship branch. Measure it. Then decide where the next one goes.',
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center bg-[#0891b2]/10">
-                        <Check className="h-3.5 w-3.5 text-[#22d3ee]" />
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center bg-[#0891b2]/10">
+                        <Check className="h-3 w-3 text-[#22d3ee]" />
                       </div>
-                      <span className="text-[15px] leading-[1.75] text-[#a1a1aa]">{item}</span>
+                      <span className="text-[14px] leading-[1.7] text-[#a1a1aa]">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -418,7 +417,7 @@ export default function DashboardPage() {
 
             <FadeIn direction="right" delay={100}>
               <div className="space-y-4">
-                <div className="relative border border-[#27272a] bg-[#18181b] overflow-hidden h-[350px] md:h-[480px]">
+                <div className="relative border border-[#27272a] bg-[#18181b] overflow-hidden h-[350px] md:h-[520px]">
                   <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                     <source src="/medias/for_franchies_banner.mp4" type="video/mp4" />
                   </video>
@@ -465,23 +464,26 @@ export default function DashboardPage() {
             </p>
           </FadeIn>
 
-          <StaggerContainer className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" delay={100}>
+          <StaggerContainer className="mt-14 gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch" delay={100}>
             {[
               { step: '01', title: 'Screen survey', text: 'We map what you already have — screens per store, inputs, which locations matter.' },
               { step: '02', title: 'Pilot branch', text: 'Adapters and an edge box go into one store. Your team publishes a real campaign that week.' },
               { step: '03', title: 'Network onboarding', text: 'Store by store, your branding on the portal, roles set up per team.' },
               { step: '04', title: 'Holographic upgrades', text: 'Add transparent or hanging displays at flagship locations when the budget allows.' },
             ].map((item, i) => (
-              <div key={i} className="group relative">
+              <div key={i} className="group relative flex flex-col h-full">
                 <div className="flex items-center gap-3 mb-5">
                   <span className="relative z-10 flex h-9 w-9 items-center justify-center border border-[#22d3ee]/40 bg-[#22d3ee]/15 text-[11px] font-bold text-[#22d3ee] transition-all duration-300 group-hover:border-[#22d3ee]/60 group-hover:text-[#22d3ee] group-hover:bg-[#22d3ee]/20 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]">
                     {item.step}
                   </span>
-                  <div className="hidden h-px flex-1 bg-gradient-to-r from-[#22d3ee]/40 to-transparent lg:block" />
+                  <div className="hidden h-px flex-1 bg-gradient-to-r from-[#22d3ee]/40 to-transparent lg:block transition-all duration-500 group-hover:from-[#22d3ee]/60" />
                 </div>
 
-                <div className="flex h-full flex-col border border-white/20 bg-black/50 backdrop-blur-xl p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#22d3ee]/40 hover:bg-black/60 hover:shadow-[0_20px_50px_-15px_rgba(34,211,238,0.2)]">
-                  <h3 className="text-[15px] font-bold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">{item.title}</h3>
+                <div className="flex-1 flex flex-col border border-white/20 bg-black/50 backdrop-blur-xl p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#22d3ee]/40 hover:bg-black/60 hover:shadow-[0_20px_50px_-15px_rgba(34,211,238,0.2)]">
+                  <div className="flex h-10 w-10 items-center justify-center bg-[#22d3ee]/10 transition-all duration-300 group-hover:bg-[#22d3ee]/20 group-hover:scale-110">
+                    <span className="text-[#22d3ee] text-[14px] font-bold">{item.step}</span>
+                  </div>
+                  <h3 className="mt-4 text-[15px] font-bold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">{item.title}</h3>
                   <p className="mt-2 text-[13px] leading-[1.7] text-white/90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">{item.text}</p>
                 </div>
               </div>

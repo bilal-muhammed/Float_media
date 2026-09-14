@@ -143,11 +143,10 @@ body {
 /* ─── Text Split Animation ─── */
 .text-split {
   display: inline;
-  white-space: pre;
 }
 .text-split .word {
   display: inline-block;
-  margin-right: 0;
+  margin-right: 0.3em;
   transition: margin-right 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .text-split .word-inner {
@@ -174,8 +173,9 @@ body {
 .text-split.is-visible .word:nth-child(15) .word-inner { transition-delay: 420ms; }
 
 /* Section title hover — words spread further with staggered cascade */
-.section-title:hover .text-split .word {
-  margin-right: 0.15em;
+.section-title:hover .text-split .word,
+h2:hover .text-split .word {
+  margin-right: 0.45em;
 }
 /* Staggered hover delays so words spread one by one */
 .section-title:hover .text-split .word:nth-child(1) { transition-delay: 0ms; }
@@ -258,7 +258,7 @@ body {
 @media (min-width: 768px) { .section-title { font-size: 2.75rem; } }
 
 .section-subtitle {
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: #a1a1aa;
   line-height: 1.7;
   max-width: 540px;
@@ -508,7 +508,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

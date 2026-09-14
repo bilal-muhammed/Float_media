@@ -605,7 +605,7 @@ export default function LandingPage() {
       {/* ─── HOW IT WORKS — TIMELINE ─── */}
       <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <SectionLabel>How It Works</SectionLabel>
-        <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
+        <HeadingReveal className="max-w-[600px] mt-4 text-[1.5rem] md:text-[2rem] font-bold leading-[1.15] text-[#fafafa] tracking-[-0.02em]" delay={60}>
           From first call to a live screen.
         </HeadingReveal>
         <Reveal delay={120}>
@@ -621,7 +621,7 @@ export default function LandingPage() {
             <LineReveal delay={300} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 items-stretch">
             {[
               { step: '01', title: 'Screen survey', desc: 'We map what you already have — screens per store, inputs, which locations matter.', icon: <Monitor className="h-5 w-5" /> },
               { step: '02', title: 'Pilot branch', desc: 'Adapters and an edge box go into one store. Your team publishes a real campaign that week.', icon: <Zap className="h-5 w-5" /> },
@@ -629,15 +629,15 @@ export default function LandingPage() {
               { step: '04', title: 'Holographic upgrades', desc: 'Add transparent or hanging displays at flagship locations when the budget allows.', icon: <Eye className="h-5 w-5" /> },
             ].map((item, i) => (
               <PerspectiveReveal key={i} delay={i * 150} direction={i % 2 === 0 ? 'left' : 'right'}>
-                <div className="group relative">
+                <div className="group relative flex flex-col h-full">
                   {/* Step circle */}
                   <div className="relative z-10 flex h-11 w-11 items-center justify-center border border-[#27272a] bg-[#0a0a0a] text-[12px] font-bold text-[#0891b2]/60 transition-all duration-500 group-hover:border-[#0891b2]/50 group-hover:text-[#22d3ee] group-hover:bg-[#0891b2]/[0.06] group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(8,145,178,0.3)]">
                     {item.step}
                   </div>
 
                   {/* Card */}
-                  <div className="mt-5 border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#0891b2]/20 group-hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.1)]">
-                    <div className="flex h-9 w-9 items-center justify-center bg-[#27272a] transition-colors duration-300 group-hover:bg-[#0891b2]/10">
+                  <div className="flex-1 flex flex-col mt-5 border border-[#27272a] bg-[#18181b] p-5 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#0891b2]/20 group-hover:shadow-[0_8px_40px_-12px_rgba(8,145,178,0.1)]">
+                    <div className="flex h-9 w-9 items-center justify-center bg-[#27272a] transition-all duration-300 group-hover:bg-[#0891b2]/10 group-hover:scale-110">
                       <span className="text-[#a1a1aa] transition-colors duration-300 group-hover:text-[#22d3ee]">{item.icon}</span>
                     </div>
                     <h3 className="mt-4 text-[14px] font-semibold text-[#fafafa]">{item.title}</h3>
