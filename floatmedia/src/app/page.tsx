@@ -306,7 +306,7 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ─── WHAT WE DO ─── */}
-      <section className="relative z-10 pt-8 pb-14 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+      <section className="relative z-10 py-16 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(8,145,178,0.08),transparent)] pointer-events-none" />
         <div className="absolute top-10 left-[10%] h-64 w-64 rounded-full bg-[#0891b2]/[0.03] blur-[100px] pointer-events-none" />
         <div className="absolute bottom-10 right-[10%] h-48 w-48 rounded-full bg-[#22d3ee]/[0.03] blur-[80px] pointer-events-none" />
@@ -387,7 +387,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── HOLOGRAPHIC DISPLAY ─── */}
-      <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
+      <section className="relative py-16 md:py-24 px-6 lg:px-8 overflow-hidden">
 
         <div className="max-w-[1200px] mx-auto">
           <SectionLabel>The Holographic Display</SectionLabel>
@@ -402,13 +402,10 @@ export default function LandingPage() {
 
           <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_minmax(300px,380px)] gap-8 items-start">
             <Reveal variant="scale" delay={200}>
-              <div className="relative border border-[#27272a] bg-[#18181b] overflow-hidden aspect-[16/10]">
+                <div className="relative border border-[#27272a] bg-[#18181b] overflow-hidden aspect-[16/10]">
                 <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                   <source src="/medias/float_add_3rd_media.mp4" type="video/mp4" />
                 </video>
-                {/* <div className="absolute top-4 left-4 z-10 inline-flex items-center border border-[#27272a] bg-[#18181b]/80 backdrop-blur px-3 py-1 text-[11px] font-medium text-[#a1a1aa]">
-                  Implementation video · 60–90 sec
-                </div> */}
               </div>
             </Reveal>
 
@@ -464,7 +461,7 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ─── INSIDE FLOTAD ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+      <section className="relative py-16 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
 
         <SectionLabel>Inside Flotad</SectionLabel>
         <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
@@ -540,7 +537,7 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ─── THE BIGGER PICTURE ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 overflow-hidden" style={{ isolation: 'isolate' }}>
+      <section className="relative py-16 md:py-24 px-6 lg:px-8 overflow-hidden" style={{ isolation: 'isolate' }}>
         <img src="/images/2nd_banner.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover" style={{ zIndex: -2 }} />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/30 to-[#0a0a0a]/60" style={{ zIndex: -1 }} />
         <FloatingOrbs />
@@ -603,9 +600,9 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ─── HOW IT WORKS — TIMELINE ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+      <section className="relative py-16 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
         <SectionLabel>How It Works</SectionLabel>
-        <HeadingReveal className="max-w-[600px] mt-4 text-[1.5rem] md:text-[2rem] font-bold leading-[1.15] text-[#fafafa] tracking-[-0.02em]" delay={60}>
+        <HeadingReveal className="section-title max-w-[600px] mt-4" delay={60}>
           From first call to a live screen.
         </HeadingReveal>
         <Reveal delay={120}>
@@ -683,7 +680,7 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ─── TALK TO US ─── */}
-      <section className="relative py-14 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
+      <section className="relative py-16 md:py-24 px-6 lg:px-8 max-w-[1200px] mx-auto overflow-hidden">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
           <PerspectiveReveal direction="left">
