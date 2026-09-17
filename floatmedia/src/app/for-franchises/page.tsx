@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import {
@@ -9,7 +10,9 @@ import {
 } from 'lucide-react';
 import { useScrollAnimation, useScrollRevealElements, useTextSplitReveal, useLineReveal } from '@/lib/hooks';
 import { cn } from '@/lib/utils';
-import HalftoneFlow from '@/components/HalftoneFlow';
+
+const HalftoneFlow = dynamic(() => import('@/components/HalftoneFlow'), { ssr: false });
+const SqueezeCarousel = dynamic(() => import('@/components/SqueezeCarousel'), { ssr: false });
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -185,7 +188,7 @@ export default function DashboardPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-[#0a0a0a]/80 pointer-events-none" />
         </div>
 
-        <div className="relative mx-auto max-w-[1200px] px-6 pointer-events-none">
+        <div className="relative mx-auto max-w-[1200px] px-6">
           <FadeIn>
             <div className="mb-8 inline-flex items-center gap-2 border border-[#27272a] bg-[#18181b] px-4 py-2 backdrop-blur-sm">
               <div className="h-1.5 w-1.5 bg-[#22d3ee] animate-pulse" />
@@ -211,14 +214,14 @@ export default function DashboardPage() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="#contact"
-                className="pointer-events-auto group inline-flex items-center gap-2 bg-[#0891b2] px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:bg-[#0e7490] hover:shadow-[0_0_60px_-12px_rgba(8,145,178,0.6)] btn-shine"
+                className="group inline-flex items-center gap-2 bg-[#0891b2] px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:bg-[#0e7490] hover:shadow-[0_0_60px_-12px_rgba(8,145,178,0.6)] btn-shine"
               >
                 Talk to us
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
                 href="#rollout"
-                className="pointer-events-auto group inline-flex items-center gap-2 border border-white/20 bg-[#18181b]/5 backdrop-blur-sm px-7 py-3.5 text-[14px] font-medium text-white/90 transition-all duration-300 hover:border-white/30 hover:bg-white/10"
+                className="group inline-flex items-center gap-2 border border-white/20 bg-[#18181b]/5 backdrop-blur-sm px-7 py-3.5 text-[14px] font-medium text-white/90 transition-all duration-300 hover:border-white/30 hover:bg-white/10"
               >
                 See how it rolls out
                 <ArrowRight className="h-3.5 w-3.5 text-[#a1a1aa] transition-transform group-hover:translate-x-0.5 group-hover:text-[#0891b2]" />
@@ -523,20 +526,31 @@ export default function DashboardPage() {
           <p className="sr-fade-up text-[11px] font-semibold tracking-[0.14em] uppercase text-[#71717a]">
             Chain Logo Wall — Drop Partner or Pilot Logos Here
           </p>
-          <StaggerContainer className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6" delay={50}>
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="group relative flex items-center justify-center border border-[#27272a] bg-[#18181b] py-10 overflow-hidden transition-all duration-500 hover:scale-[1.02] origin-center hover:border-[#0891b2]/20"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0891b2]/[0.04] to-transparent bg-[length:200%_100%] animate-[shimmer_3s_infinite]" />
-                <div className="relative flex flex-col items-center gap-2 text-center">
-                  <ImageIcon className="h-7 w-7 text-[#71717a] transition-colors group-hover:text-[#a1a1aa]" strokeWidth={1} />
-                  <span className="text-xs text-[#71717a]">Logo</span>
-                </div>
-              </div>
-            ))}
-          </StaggerContainer>
+          <div className="mt-8">
+            <SqueezeCarousel
+              slides={[
+                { id: 1, title: 'Partner 1', background: 'linear-gradient(135deg, #18181b, #27272a)' },
+                { id: 2, title: 'Partner 2', background: 'linear-gradient(135deg, #0f172a, #1e293b)' },
+                { id: 3, title: 'Partner 3', background: 'linear-gradient(135deg, #1a1a2e, #16213e)' },
+                { id: 4, title: 'Partner 4', background: 'linear-gradient(135deg, #0d1117, #161b22)' },
+                { id: 5, title: 'Partner 5', background: 'linear-gradient(135deg, #18181b, #0891b2)' },
+                { id: 6, title: 'Partner 6', background: 'linear-gradient(135deg, #0a0a0a, #22d3ee)' },
+              ]}
+              height="clamp(160px, 28cqi, 300px)"
+              slatWidth={6}
+              slatGap={6}
+              gap={12}
+              radius={4}
+              duration={800}
+              hoverGrow={true}
+              autoplay={true}
+              interval={5000}
+              controls={true}
+              accent="#0891b2"
+              accentForeground="#fafafa"
+              label="Partner logos"
+            />
+          </div>
         </div>
       </section>
 
